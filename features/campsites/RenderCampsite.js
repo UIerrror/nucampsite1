@@ -7,7 +7,7 @@ const RenderCampsite = (props) => {
     if (campsite) {
         return (
             <Card containerStyle={styles.cardContainer}>
-                <Card.Image source={{uri: baseUrl + campsite.image}}>
+                <Card.Image source={{ uri: baseUrl + campsite.image }}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text
                             style={{
@@ -27,7 +27,11 @@ const RenderCampsite = (props) => {
                     color='#f50'
                     raised
                     reverse
-                    onPress= {() => props.isFavorite ? console.log('Already set as a favorite') : props.markFavorite()}
+                    onPress={() =>
+                        props.isFavorite
+                            ? console.log('Already set as a favorite')
+                            : props.markFavorite()
+                    }
                 />
             </Card>
         );
