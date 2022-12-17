@@ -4,7 +4,6 @@ import { FlatList, StyleSheet, Text, View, Button, Modal } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleFavorite } from "../features/favorites/favoritesSlice";
 import { useState } from "react";
-import { postComment } from "../features/comments/commentsSlice";
 
 const CampsiteInfoScreen = ({ route }) => {
   const { campsite } = route.params;
@@ -18,7 +17,7 @@ const CampsiteInfoScreen = ({ route }) => {
 
   const handleSubmit = () => {
     const newComment = { author, rating, text, campsiteId: campsite.id };
-    dispatch(postComment(newComment));
+    console.log(newComment);
     setShowModal(!showModal);
   };
 
@@ -35,9 +34,10 @@ const CampsiteInfoScreen = ({ route }) => {
         <Rating
           readonly
           imageSize={10}
-          startingValue={item.rating}
+			 startingValue={item.rating}
           style={{ alignItems: "flex-start", paddingVertical: "5%" }}
         ></Rating>
+        {/* <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text> */}
         <Text style={{ fontSize: 12 }}>{`--${item.author}, ${item.date}`}</Text>
       </View>
     );
@@ -55,9 +55,9 @@ const CampsiteInfoScreen = ({ route }) => {
         ListHeaderComponent={
           <>
             <RenderCampsite
-              campsite={campsite}
               isFavorite={favorites.includes(campsite.id)}
               markFavorite={() => dispatch(toggleFavorite(campsite.id))}
+              campsite={campsite}
               onShowModal={() => setShowModal(!showModal)}
             />
             <Text style={styles.commentsTitle}>Comments</Text>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#43484D",
     padding: 10,
-    paddingTop: 20,
+    paddingTop: 30,
   },
   commentItem: {
     paddingVertical: 10,
